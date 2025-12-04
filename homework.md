@@ -13,7 +13,7 @@ Create a best-practice Terraform folder structure
 
 Build a VM resource (simulated using the null_resource)
 
-Use local and remote backends
+Use local and remote backenasdadasdadadads
 
 Detect infrastructure drift
 
