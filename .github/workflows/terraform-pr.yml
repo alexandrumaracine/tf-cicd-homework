@@ -2,17 +2,18 @@ name: Terraform PR Check
 
 on:
   pull_request:
-    branches:
-      - main
 
 jobs:
-  terraform:
-    name: Validate Terraform
+  validate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -21,6 +22,7 @@ jobs:
 
       - name: Terraform Format Check
         run: terraform fmt -check
+        working-directory: terraform
 
       - name: Terraform Init
         run: terraform init
