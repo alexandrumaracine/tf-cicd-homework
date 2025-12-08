@@ -1,19 +1,21 @@
-locals {
-  vm_names = {
-    vm1 = "vm-one"
-    vm2 = "vm-two"
-    vm3 = "vm-three"
-  }
+data "azurerm_resource_group" "rg" {
+  name = "testHomework"
 }
 
-module "vm" {
-  source = "./modules/vm"
+module "storage_accounts" {
+  source = "./modules/storage_account"
 
-  # for_each creates named instances instead of index-based ones
-  for_each = local.vm_names
+  for_each = {
+    sa1 = "alexmarasa001"
+    sa2 = "alexmarasa002"
+    sa3 = "alexmarasa003"
+  }
 
-  name   = each.value
-  image  = var.vm_image
-  cpus   = var.vm_cpus
-  memory = var.vm_memory
+  name                = each.value
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+
+  tags = {
+    Owner = "AlexMara"
+  }
 }
