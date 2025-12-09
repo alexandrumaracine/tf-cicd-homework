@@ -12,6 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Export Terraform Azure credentials
+        run: |
+          echo "TF_VAR_subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_tenant_id=${{ secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_client_id=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "TF_VAR_client_secret=${{ secrets.AZURE_CLIENT_SECRET }}" >> $GITHUB_ENV
+
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -22,13 +29,6 @@ jobs:
         with:
           terraform_version: 1.5.7
       
-      - name: Export Terraform Azure credentials
-        run: |
-          echo "TF_VAR_subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_tenant_id=${{ secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_client_id=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "TF_VAR_client_secret=${{ secrets.AZURE_CLIENT_SECRET }}" >> $GITHUB_ENV
-
       - name: Terraform Init
         run: terraform init
         working-directory: terraform
