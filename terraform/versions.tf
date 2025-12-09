@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "./tfstate/terraform.tfstate"
+    path = "./tfstate-remote/terraform.tfstate"
   }
 
   required_providers {

@@ -19,13 +19,16 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.5.7
+
+      - name: Ensure local state directory exists
+        run: mkdir -p terraform/tfstate-remote    
       
       - name: Download Terraform State
         uses: actions/download-artifact@v4
         with:
           name: terraform-state
           path: terraform/tfstate-remote
-          
+
       - name: Terraform Init
         run: terraform init
         working-directory: terraform
