@@ -27,6 +27,12 @@ jobs:
           echo "ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
           echo "ARM_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}" >> $GITHUB_ENV
 
+      - name: Debug ARM vars (safe)
+        run: |
+          echo "SUB=${ARM_SUBSCRIPTION_ID}"
+          echo "TENANT=${ARM_TENANT_ID}"
+          echo "CLIENT=${ARM_CLIENT_ID}"  
+
       # 3️⃣ Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
