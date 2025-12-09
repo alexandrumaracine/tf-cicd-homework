@@ -21,9 +21,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.5.7
-      
-      - name: Ensure local state directory exists
-        run: mkdir -p terraform/tfstate-remote
 
       - name: Terraform Init
         run: terraform init
@@ -36,9 +33,3 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: terraform
-
-      - name: Upload Terraform State
-        uses: actions/upload-artifact@v4
-        with:
-          name: terraform-state
-          path: terraform/tfstate-remote/terraform.tfstate  
