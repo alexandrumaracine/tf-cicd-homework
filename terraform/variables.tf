@@ -1,20 +1,16 @@
-variable "vm_name" {
-  type    = string
-  default = "test-vm"
+variable "subscription_id" {
+  type = string
 }
 
-variable "vm_image" {
-  type        = string
-  description = "Local VDI file path"
-  default     = "base-image.vdi"
+variable "tenant_id" {
+  type = string
 }
 
-variable "vm_cpus" {
-  type    = number
-  default = 1
+variable "client_id" {
+  type = string
 }
 
-variable "vm_memory" {
-  type    = number
-  default = 512
+variable "client_secret" {
+  type      = string
+  sensitive = true
 }
